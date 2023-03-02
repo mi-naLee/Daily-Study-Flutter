@@ -1,115 +1,113 @@
 import 'package:flutter/material.dart';
+// material : 플러터의 UI 관련 클래스 포함
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
+  // runApp : binding.dart 클래스에 정의되어 있어 플러터 앱 시작
+  //          이 함수에 플러터 앱을 시작하면서 화면에 표시할 위젯 전달
+  // # widget : 클래스로 구현되며 이를 상속받는 다양한 위젯이 있다.
+  //            자동차 부품처럼 특정한 기능을 담당.
 }
 
-class MyApp extends StatelessWidget {
+/*class MyApp extends StatelessWidget {
+  // StatelessWidget : 앱이 위젯의 상태를 감시(연결)할 필요가 없음
+  // ex) 내용을 갱신할 필요가 없는 도움말 위젯(화면에 보이기 전에 모두 로딩)
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    var switchValue = false;
+    return MaterialApp(
+      // MaterialApp 반환 : 그림을 그리는 데 필요한 도화지이므로 해당 함수 반환
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue, // 메인 색상 지정
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        // 앱이 모바일, 웹, 데스크톱, 맥 등 어떤 플랫폼에서도 자연스럽게 보이도록 지원
+      ),
+      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      darkTheme: ThemeData.light(),
+      /*home: Container(
+        // Container : 특정 공간을 책임지는 역할
+        color: Colors.white,
+        child: Center(
+          child: Text(
+              'hello\nFlutter',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.blue, fontSize: 20)),
+        ),
+      )*/
+      home: Scaffold(
+        body: Center(
+          child: Switch(
+              value: switchValue,
+              onChanged: (value) {
+                switchValue = value;
+              }),
+        ),
+      ),
+      // home : 앱을 실행할 때 첫 화면에 어떤 내용을 표시할 것인가 지정
+      // --> MyHomePage 클래스 지정정
+    );
+  }
+}*/
+
+class MyApp extends StatefulWidget {
+  // StatefulWidget : 앱이 위젯의 상태를 감시하다 특정 상태가 되면 알맞은 처리
+  // ex) 계산기 앱에서 버튼 누르면 결괏값 출력(동적 위젯)
+  // const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  // final String title;
+
+  @override
+  State<StatefulWidget> createState() => _MyApp();
+}
+
+class _MyApp extends State<MyApp> {
+  // _(under score) : 내부에서만 사용할 수 있다.(main.dart 내에서만 사용할 것이다.)
+  var switchValue = false;
+  String test = 'hello';
+  Color _color = Colors.blue;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
+        title: 'Flutter Demo',
+        theme: ThemeData(
         primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+    ),
+    darkTheme: ThemeData.light(),
+    home: Scaffold(
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+       /*child: Switch(
+        value: switchValue,
+        onChanged: (value) {
+          setState(() {
+            // setState : 변경되는 사실을 앱에 알려 화면을 갱신하기
+            print(value);
+            switchValue = value;
+          });
+        }),*/
+        child: ElevatedButton(
+          child: Text('$test'),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all((_color)),
+          ),
+          onPressed: () {
+            if(_color == Colors.blue){
+              setState(() {
+                test = 'flutter';
+                _color = Colors.amber;
+              });
+            }else{
+              setState(() {
+                test = 'flutter';
+                _color = Colors.blue;
+              });
+            }
+          },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    ));
   }
 }
