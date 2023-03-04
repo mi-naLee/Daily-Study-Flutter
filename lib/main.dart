@@ -12,6 +12,7 @@ void main() {
 /*class MyApp extends StatelessWidget {
   // StatelessWidget : 앱이 위젯의 상태를 감시(연결)할 필요가 없음
   // ex) 내용을 갱신할 필요가 없는 도움말 위젯(화면에 보이기 전에 모두 로딩)
+  // --> Stateless는 생명주기가 없다.
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -60,7 +61,11 @@ class MyApp extends StatefulWidget {
   // final String title;
 
   @override
-  State<StatefulWidget> createState() => _MyApp();
+  State<StatefulWidget> createState() {
+    print('createState');
+    return _MyApp();
+  }
+  // Stateful의 생명주기 (1) : Stateful에서 감시 중 상태 변경 신호가 오면 State 클래스가 화면 갱신
 }
 
 class _MyApp extends State<MyApp> {
@@ -68,8 +73,11 @@ class _MyApp extends State<MyApp> {
   var switchValue = false;
   String test = 'hello';
   Color _color = Colors.blue;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // 위젯 만든 후 화면에 렌더링
+
+    print('build');
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -95,7 +103,7 @@ class _MyApp extends State<MyApp> {
           ),
           onPressed: () {
             if(_color == Colors.blue){
-              setState(() {
+              setState(() { // setState : 위젯의 상태 갱신
                 test = 'flutter';
                 _color = Colors.amber;
               });
